@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Carregando My Anime Lintz...</title>
+    <style>
+        :root {
+            --cor-fundo-esqueleto: #242526;
+            --cor-pulso-esqueleto: #3a3b3c;
+            --cor-principal-esqueleto: #6a3de8;
+        }
+
+        body {
+            background-color: #18191a;
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        .skeleton {
+            background-color: var(--cor-fundo-esqueleto);
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { background-color: var(--cor-fundo-esqueleto); }
+            50% { background-color: var(--cor-pulso-esqueleto); }
+            100% { background-color: var(--cor-fundo-esqueleto); }
+        }
+
+        /* Estrutura do Header Esqueleto */
+        header.skeleton-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            background-color: #1e1e1e;
+            border-bottom: 1px solid #333;
+        }
+        
+        .skeleton-logo {
+            width: 150px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        nav.skeleton-nav {
+            display: flex;
+            gap: 20px;
+        }
+        .skeleton-nav-item {
+            width: 60px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .skeleton-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .skeleton-text {
+            width: 80px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        .skeleton-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        /* Estrutura da Roda Girando (Spinner) */
+        .spinner-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .spinner {
+            border: 5px solid var(--cor-fundo-esqueleto); /* O círculo cinza de fundo */
+            border-top: 5px solid var(--cor-principal-esqueleto); /* A parte roxa que gira */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="skeleton-header">
+        <div class="skeleton skeleton-logo"></div>
+        <nav class="skeleton-nav">
+            <div class="skeleton skeleton-nav-item"></div>
+            <div class="skeleton skeleton-nav-item"></div>
+            <div class="skeleton skeleton-nav-item"></div>
+        </nav>
+        <div class="skeleton-profile">
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-avatar"></div>
+        </div>
+    </header>
+
+    <div class="spinner-wrapper">
+        <div class="spinner"></div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+
+</body>
+</html>

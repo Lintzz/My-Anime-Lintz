@@ -1,0 +1,367 @@
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* --- CABEÇALHO E NAVEGAÇÃO --- */
+.header {
+    background-color: var(--cor-superficie);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .header-logo{
+    display: flex;
+    height: 60px;
+    align-items: center;
+    padding: 0 1.125rem;
+    
+}
+
+header .header-logo svg {
+    height: 30px;
+    color: var(--cor-principal); 
+}
+
+header .header-logo svg:hover {
+    color: var(--cor-principal-hover);
+    cursor: pointer;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cor-texto);
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: var(--cor-texto);
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.nav-links a.btn-login {
+    border: 1px solid var(--cor-texto-secundario);
+}
+
+.nav-links a.btn-register {
+    background-color: var(--cor-principal);
+    border: 1px solid var(--cor-principal);
+}
+
+.nav-links a:hover {
+    background-color: var(--cor-superficie);
+}
+
+.nav-links a.btn-register:hover {
+    background-color: var(--cor-principal-hover);
+}
+
+/* --- SEÇÃO HERO --- */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 1)), url('https://source.unsplash.com/1600x900/?anime,dark') no-repeat center center/cover;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--cor-texto-secundario);
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.hero-buttons .btn {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--cor-texto);
+    padding: 15px 35px;
+    border-radius: 8px;
+    font-weight: 600;
+    margin: 0 10px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.hero-buttons .btn-primary {
+    background-color: var(--cor-principal);
+}
+
+.hero-buttons .btn:hover {
+    transform: translateY(-3px);
+}
+
+.hero-buttons .btn-primary:hover {
+    background-color: var(--cor-principal-hover);
+}
+
+
+/* --- SEÇÃO DE RECURSOS --- */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background-color: var(--cor-superficie);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-card i {
+    font-size: 3rem;
+    color: var(--cor-principal);
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: var(--cor-texto-secundario);
+}
+
+/* --- SEÇÃO CTA FINAL --- */
+.cta-section {
+    background-color: var(--cor-superficie);
+    text-align: center;
+}
+
+.cta-section h2 {
+    margin-bottom: 20px;
+}
+
+.cta-section .btn {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--cor-texto);
+    background-color: var(--cor-principal);
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.cta-section .btn:hover {
+        background-color: var(--cor-principal-hover);
+        transform: scale(1.05);
+}
+
+/* --- RODAPÉ --- */
+.footer {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--cor-texto-secundario);
+    border-top: 1px solid var(--cor-superficie);
+}
+
+/* --- MODAL DE LOGIN --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background-color: var(--cor-superficie);
+    padding: 40px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: var(--cor-texto-secundario);
+    cursor: pointer;
+}
+
+.modal-content h3 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--cor-texto-secundario);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #121212;
+    color: var(--cor-texto);
+    font-size: 1rem;
+}
+
+.btn-modal-login {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--cor-principal);
+    color: var(--cor-texto);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-modal-login:hover {
+    background-color: var(--cor-principal-hover);
+}
+
+.modal-switch {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--cor-texto-secundario);
+}
+
+.modal-switch a {
+    color: var(--cor-principal);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.navbar svg{
+    width: 200px;
+    color: var(--cor-principal);
+}
+
+.navbar svg:hover{
+    color: var(--cor-principal-hover);
+}
+
+.divider {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+}
+
+.divider:not(:empty)::before {
+    margin-right: 10px;
+}
+
+.divider:not(:empty)::after {
+    margin-left: 10px;
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #ffffff;
+    color: #444;
+    border: 1px solid #ccc;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.google-btn:hover {
+    background-color: #f1f1f1;
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.error-message {
+    color: #ff3860;
+    background-color: #ffe0e6; 
+    border: 1px solid #ff3860;
+    padding: 10px;
+    margin-bottom: 15px; 
+    border-radius: 4px;
+    font-size: 0.9em;
+    display: none;
+    text-align: center;
+}
