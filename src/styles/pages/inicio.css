@@ -1,0 +1,104 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--cor-principal); 
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.anime-section {
+    margin-bottom: 3rem;
+}
+
+.anime-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 1rem; 
+    gap: 1.5rem; 
+}
+
+.carousel::-webkit-scrollbar {
+    height: 8px;
+}
+.carousel::-webkit-scrollbar-track {
+    background: #2c2c2c;
+    border-radius: 10px;
+}
+.carousel::-webkit-scrollbar-thumb {
+    background: var(--cor-principal);
+    border-radius: 10px;
+}
+.carousel::-webkit-scrollbar-thumb:hover {
+    background: var(--cor-principal-hover);
+}
+
+.anime-card {
+    flex: 0 0 225px;
+    background-color: var(--cor-superficie);
+    border-radius: 8px;
+    overflow: hidden; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.anime-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.anime-card img {
+    width: 100%;
+    height: 320px; 
+    object-fit: cover; 
+    display: block;
+}
+
+.anime-card h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 1rem;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cta-section {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: var(--cor-superficie);
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+.cta-section h2 {
+    margin-bottom: 1.5rem;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--cor-principal);
+    color: var(--cor-texto);
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--cor-principal-hover);
+    transform: scale(1.05);
+}

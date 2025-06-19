@@ -1,0 +1,252 @@
+header {
+    display: flex;
+    align-items: center;
+    height: 65px;
+    font-size: 1rem;
+    background: var(--cor-superficie);
+    border-bottom: 1px solid var(--cor-borda);
+    position: relative;
+}
+
+header .header-logo {
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    height: 100%; 
+}
+
+header .header-logo a {
+    text-decoration: none;
+    color: inherit;
+    display: flex; 
+    align-items: center;
+}
+
+header .header-logo svg {
+    height: 30px;
+    color: var(--cor-principal);
+    transition: color 0.2s ease; 
+}
+
+header .header-logo a:hover svg {
+    color: var(--cor-principal-hover);
+}
+
+header nav {
+    display: flex;
+    height: 100%;
+}
+
+header nav a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--cor-texto-secundario); 
+    padding: 0 1.25rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+header nav a:hover {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+}
+
+.pagina-inicio nav a[href*="inicio"],
+.pagina-dashboard nav a[href*="dashboard"],
+.pagina-buscar nav a[href*="buscar"],
+.pagina-descobrir nav a[href*="descobrir"] {
+    color: var(--cor-principal);
+    font-weight: bold;
+    box-shadow: inset 0 -2px 0 var(--cor-principal);
+}
+
+.perfil-container {
+    position: relative;
+    margin-left: auto;
+    display: inline-block;
+    height: 100%;
+    
+} 
+
+.button-perfil {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 10px;
+    background-color: var(--cor-superficie);
+    border: none;
+    cursor: pointer;
+    padding: 0 1.5rem;
+}
+
+.button-perfil:hover {
+    background-color: var(--cor-fundo);
+}
+
+.button-perfil .userName {
+    font-family: var(--font-principal);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--cor-texto);
+    margin: 0;
+}
+
+.button-perfil .userProfilePicture {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+/* --- O Dropdown em si --- */
+.perfil-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 1000;
+    width: 280px;
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+    padding: 8px;
+
+    opacity: 0;
+    transform: translateY(-10px);
+    visibility: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.perfil-container.ativo .perfil-dropdown {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+.perfil-dropdown .perfil-link-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--cor-texto);
+    transition: background-color 0.2s ease;
+}
+.perfil-dropdown .perfil-link-header:hover {
+    background-color: var(--cor-fundo);
+}
+.perfil-link-header .userProfilePicture {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.perfil-link-header .userName {
+    font-weight: 600;
+    margin: 0;
+}
+.perfil-link-header .perfil-subtexto {
+    font-size: 0.85rem;
+    color: var(--cor-texto-secundario);
+    margin: 0;
+}
+
+.perfil-divisor {
+    border: none;
+    height: 1px;
+    background-color: var(--cor-borda);
+    margin: 8px 0;
+}
+
+.nav-menu-link,
+.perfil-sair {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--cor-texto);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    
+}
+.perfil-sair {
+    border: none;
+    background: none;
+    text-align: left;
+}
+
+.nav-menu-link:hover {
+    background-color: var(--cor-fundo);
+}
+
+.perfil-sair:hover {
+    background-color: rgba(229, 62, 62, 0.1); 
+    color: var(--cor-destrutiva); 
+}
+
+.perfil-svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+    color: var(--cor-texto); 
+    transition: color 0.2s ease;
+
+}
+
+.perfil-sair:hover .perfil-svg {
+    color: var(--cor-destrutiva);
+}
+
+.nav-menu-link p,
+.perfil-sair p {
+    margin: 0;
+    font-weight: 500;
+    font-family: var(--font-principal);
+}
+
+.nav-menu-link.ativo {
+    color: var(--cor-principal);
+    font-weight: 700;
+    background-color: var(--cor-fundo); 
+}
+
+.nav-menu-link.ativo .perfil-svg {
+    color: var(--cor-principal);
+}
+
+.perfil-link-header.ativo {
+    background-color: var(--cor-fundo);
+}
+
+.perfil-link-header.ativo .userName {
+    color: var(--cor-principal);
+}
+
+.nav-menu-link:not(.ativo):hover .hoverPerfil,
+.perfil-link-header:not(.ativo):hover {
+    background-color: var(--cor-fundo);
+}
+
+.nav-menu-link.ativo:hover,
+.perfil-link-header.ativo:hover {
+    cursor: default; 
+}
+
+.button-perfil.loading .userName,
+.button-perfil.loading .userProfilePicture {
+    background-color: var(--cor-fundo);
+    color: transparent;
+    border-color: transparent;
+}
+
+.button-perfil.loading .userName {
+    width: 40px;  
+    height: 1em;  
+    border-radius: 4px;
+}

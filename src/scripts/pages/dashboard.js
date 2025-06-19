@@ -1,6 +1,6 @@
-import { auth, db } from '/js/firebase-init.js';
+import { auth, db } from '/src/scripts/config/firebase-init.js';
 
-import {onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
+import {onAuthStateChanged} from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
 import {
   collection,
   addDoc,
@@ -13,20 +13,17 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js";
 
 // Seletores de Elementos do DOM
-const botaoPerfil = document.querySelector('.button-perfil');
-const perfil = document.querySelector('.perfil-dropdown');
 const toggleButton = document.getElementById('toggleFiltro');
 const botaoGrade = document.getElementById('botao-grade');
 const botaoLista = document.getElementById('botao-lista');
 const listaAnimes = document.getElementById('minha-lista');
 const botaoAdicionar = document.getElementById('botao-adicionar');
-const userNameElements = document.querySelectorAll(".userName");
-const userImageElements = document.querySelectorAll(".userProfilePicture");
-const botaoSair = document.getElementById('btn-sair');
+
 const formPesquisa = document.getElementById('form-pesquisa')
 const aplicarFiltrosBtn = document.getElementById('aplicarFiltros');
 const limparFiltrosBtn = document.getElementById('limparFiltros');
-const modalContainer = document.getElementById('modal-container');
+
+const modalContainerEl = document.getElementById('meuModalDinamico');
 const modalTitleEl = document.getElementById('modal-title');
 const modalMessageEl = document.getElementById('modal-message');
 const modalButtonsEl = document.getElementById('modal-buttons');
@@ -42,7 +39,6 @@ let unsubscribeAnimes;
 onAuthStateChanged(auth, (user) => {
     if (user) {
         usuarioAtual = user;
-        atualizarUsuarioUI(user);
 
         const ordenacaoPadrao = localStorage.getItem('list_default_sort') || 'recent';
         const filtroPadrao = localStorage.getItem('list_default_filter') || 'todos';
@@ -67,7 +63,7 @@ onAuthStateChanged(auth, (user) => {
         }
 
         if(listaAnimes) listaAnimes.innerHTML = '<p class="carregando-msg">Você precisa fazer login para ver sua lista.</p>';
-        window.location.href = "/login.html"; 
+        window.location.href = "/src/pages/login.html"; 
     }
 });
 
@@ -203,7 +199,7 @@ function CriarCardAnime(anime) {
 // Carrega e filtra nomes do animes_completos.json
 async function carregarAnimesParaAutocomplete() {
   try {
-    const response = await fetch('/assets/data/animes_completos.json');
+    const response = await fetch('/src/assets/data/animes_completos.json');
     if (!response.ok) throw new Error(`Erro: ${response.statusText}`);
     
     const todosOsAnimes = await response.json();
@@ -227,35 +223,24 @@ async function carregarAnimesParaAutocomplete() {
   }
 }
 
-// Atualiza o nome e foto do usuário
-function atualizarUsuarioUI(user) {
-  userNameElements.forEach(el => {
-    el.textContent = user.displayName || "";
-  });
-
-  userImageElements.forEach(el => {
-    el.src = user.photoURL || "/assets/img/semimagem.jpg";
-  });
-}
-
 // Define a cor da barra de status ao renderizar
 function definirCorStatus(atual, total) {
   atual = Number(atual);
   total = Number(total);
-  if (atual === 0) return "blue";
-  if (atual > 0 && atual < total) return "green";
-  if (atual === total) return "purple";
+  if (atual === 0) return "gray";
+  if (atual > 0 && atual < total) return "yellow";
+  if (atual === total) return "green";
   return "transparent";
 };
 
 // Atualiza a cor da barra de status durante a edição
 function atualizarCorStatus(atual, total, corstatus) {
   if (atual === 0) {
-    corstatus.style.backgroundColor = "blue";
+    corstatus.style.backgroundColor = "gray";
   } else if (atual > 0 && atual < total) {
-    corstatus.style.backgroundColor = "green";
+    corstatus.style.backgroundColor = "yellow";
   } else if (atual === total) {
-    corstatus.style.backgroundColor = "purple";
+    corstatus.style.backgroundColor = "green";
   } else {
     corstatus.style.backgroundColor = "transparent";
   }
@@ -288,18 +273,19 @@ function showModal({ title, message, buttons = [] }) {
     button.className = buttonInfo.class; 
     
     button.addEventListener('click', () => {
-      closeModal();
+      closeModal(); 
       if (buttonInfo.onClick) {
         buttonInfo.onClick(); 
       }
     });
     modalButtonsEl.appendChild(button);
   });
-  modalContainer.classList.add('active');
+
+  modalContainerEl.classList.add('visible');
 }
 
 function closeModal() {
-  modalContainer.classList.remove('active');
+  modalContainerEl.classList.remove('visible');
 }
 
 function showAlert(message, title = 'Aviso') {
@@ -307,7 +293,7 @@ function showAlert(message, title = 'Aviso') {
     title,
     message,
     buttons: [
-      { text: 'OK', class: 'botao-principal', onClick: () => {} }
+      { text: 'OK', class: 'modal-button button-secondary', onClick: () => {} }
     ]
   });
 }
@@ -318,8 +304,8 @@ function showConfirm(message, title = 'Confirmação') {
       title,
       message,
       buttons: [
-        { text: 'Cancelar', class: 'botao-neutro', onClick: () => resolve(false) },
-        { text: 'Confirmar', class: 'botao-principal', onClick: () => resolve(true) }
+        { text: 'Cancelar', class: 'modal-button button-secondary', onClick: () => resolve(false) },
+        { text: 'Confirmar', class: 'modal-button button-destructive', onClick: () => resolve(true) }
       ]
     });
   });
@@ -515,7 +501,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Favoritar/Editar/Apagar
   listaAnimes.addEventListener('click', async (event) => {
-    // Lógica para o botão "Apagar"
+    // Verifica se o clique foi no botão "Apagar"
     if (event.target.tagName === 'BUTTON' && event.target.textContent === 'Apagar') {
         const card = event.target.closest('.card');
         const docId = card?.dataset.id;
@@ -524,19 +510,26 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!docId) return;
 
         // 1. Chama nosso novo modal e ESPERA (await) pela resposta
+        //    Isso só funciona porque a função do listener é 'async'
         const foiConfirmado = await showConfirm(`Tem certeza que deseja apagar "${animeNome}" da sua lista?`);
 
         // 2. Se a resposta for 'true', executa a exclusão
         if (foiConfirmado) {
+            console.log("Usuário confirmou! Apagando o item...");
             const docRef = doc(db, "users", usuarioAtual.uid, "animes", docId);
             try {
                 await deleteDoc(docRef);
+                // Opcional: pode mostrar um alerta de sucesso
+                showAlert("Item apagado com sucesso!");
             } catch (error) {
                 console.error("Erro ao apagar o anime: ", error);
                 showAlert("Não foi possível apagar o item.");
             }
+        } else {
+            console.log("Usuário cancelou a exclusão.");
         }
     }
+
 
     // Lógica para o botão "Favoritar"
     if (event.target.closest('.favorito')) {
@@ -654,18 +647,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // PERFIL
-  botaoPerfil.addEventListener('click', (e) => {
-      e.stopPropagation(); 
-      perfil.classList.toggle('perfil-dropdown-active');
-  });
-
-  document.addEventListener('click', (e) => {
-      if (!perfil.contains(e.target) && !botaoPerfil.contains(e.target)) {
-          perfil.classList.remove('perfil-dropdown-active');
-      }
-  });
-
   // Modo List
   botaoLista.addEventListener('click', function() {
       listaAnimes.classList.remove('view-grid');
@@ -750,18 +731,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   });
 
-  // BOTAO SAIR CONTA 
-  botaoSair.addEventListener("click", () => {
-    signOut(auth)
-      .then(() => {
-        //console.log("Usuário desconectado.");
-        // window.location.href = "/login.html";
-      })
-      .catch((error) => {
-        console.error("Erro ao sair:", error);
-      });
-  });
-
   // Barra Pesquisa
   formPesquisa.addEventListener('submit', function(event){
     event.preventDefault(); 
@@ -783,14 +752,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   });
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && modalContainer.classList.contains('active')) {
-      closeModal();
-    }
-  });
-
-  modalContainer.addEventListener('click', e => {
-    if (e.target === modalContainer) {
+  modalContainerEl.addEventListener('click', e => {
+    if (e.target === modalContainerEl) {
       closeModal();
     }
   });

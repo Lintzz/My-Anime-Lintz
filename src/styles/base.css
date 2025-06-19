@@ -28,10 +28,7 @@ body{
     color: var(--cor-texto);
 }
 
-body.hide-score .score {
-    display: none;
-}
-
-body.hide-progress-bar .corstatus {
-    display: none;
+.nav-menu-link.ativo {
+    color: var(--cor-principal);
+    font-weight: bold;
 }

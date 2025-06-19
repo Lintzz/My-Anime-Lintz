@@ -1,0 +1,110 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    align-items: center;
+    z-index: 1000;
+    opacity: 0; 
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: var(--cor-fundo);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 450px;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.visible .modal-content {
+    transform: scale(1);
+}
+
+/* Título */
+.modal-title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--cor-texto);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Corpo / Mensagem */
+.modal-body {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+/* Grupo de Input (se houver) */
+.modal-input-group {
+    margin-bottom: 25px;
+}
+
+.modal-input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--cor-texto);
+}
+
+.modal-input {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border: 1px solid var(--cor-borda-input);
+    font-size: 16px;
+}
+
+/* Rodapé com os botões */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px; /* Espaçamento entre os botões */
+}
+
+/* Estilo base para TODOS os botões do modal */
+.modal-button {
+    padding: 10px 25px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
+
+/* Estilo para o botão secundário (Cancelar, Fechar) */
+.modal-button.button-secondary {
+    background-color: var(--cor-botao-secundario-bg);
+    color: var(--cor-botao-secundario-texto);
+    border: 1px solid var(--cor-borda-input); /* Borda sutil */
+}
+.modal-button.button-secondary:hover {
+    background-color: var(--cor-botao-secundario-hover);
+}
+
+/* Estilo para o botão destrutivo (Apagar, Excluir) */
+.modal-button.button-destructive {
+    background-color: var(--cor-botao-destrutivo-bg);
+    color: var(--cor-botao-destrutivo-texto);
+}
+.modal-button.button-destructive:hover {
+    background-color: var(--cor-botao-destrutivo-hover);
+}

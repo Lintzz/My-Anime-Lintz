@@ -1,4 +1,4 @@
-import { auth } from '/js/firebase-init.js';
+import { auth } from '/src/scripts/config/firebase-init.js';
 
 import {
     onAuthStateChanged,
@@ -17,7 +17,7 @@ let isRegistering = false;
 onAuthStateChanged(auth, (user) => {
     if (user && !isRegistering) {
         //console.log("VIGIA: Usuário já tinha sessão. Redirecionando...");
-        window.location.href = '/pages/dashboard.html';
+        window.location.href = '/src/pages/inicio.html';
     } else {
         //console.log("VIGIA: Nenhum usuário logado ou em processo de registro. Permanece na página.");
     }

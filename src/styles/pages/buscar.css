@@ -1,0 +1,176 @@
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.search-container {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.search-container h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--cor-texto); /* Usa a cor de texto principal */
+}
+
+.search-container p {
+    font-size: 1.1rem;
+    color: var(--cor-texto-secundario); /* Cor de texto mais suave */
+    margin-bottom: 2rem;
+}
+
+#search-form {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#search-input {
+    flex-grow: 1;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--cor-borda); /* Borda padrão */
+    border-radius: 8px 0 0 8px;
+    background-color: var(--cor-superficie); /* Fundo branco/superfície */
+    color: var(--cor-texto); /* Texto escuro */
+    outline: none;
+}
+#search-input:focus {
+    border-color: var(--cor-principal); /* Borda roxa ao focar */
+}
+
+#search-form button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background-color: var(--cor-principal); /* Roxo */
+    color: #ffffff; /* Texto branco para melhor contraste com o roxo */
+    border-radius: 0 8px 8px 0;
+    transition: background-color 0.3s ease;
+}
+#search-form button:hover {
+    background-color: var(--cor-principal-hover); /* Roxo mais escuro no hover */
+}
+
+#results-container {
+    min-height: 300px;
+}
+.loading, .error {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 4rem 0;
+    color: var(--cor-texto-secundario); /* Cor suave para mensagens */
+}
+
+.search-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.result-card {
+    background-color: var(--cor-superficie); /* Fundo branco */
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--cor-borda); /* Borda sutil para destacar do fundo */
+}
+.result-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Sombra suave no hover */
+}
+.result-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+.result-card h3 {
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--cor-texto); /* Garante que o texto do card seja o principal */
+}
+
+.anime-details-container {
+    display: flex;
+    gap: 2rem;
+    background-color: var(--cor-superficie); /* Fundo branco para a área de detalhes */
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--cor-borda); /* Borda sutil */
+}
+
+.details-left {
+    flex: 0 0 300px; 
+}
+.details-left img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.details-right {
+    flex-grow: 1;
+}
+.details-right h2 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--cor-texto);
+}
+.details-right .stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--cor-borda); /* Linha divisória sutil */
+    padding-bottom: 1rem;
+}
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+.stat span:first-child {
+    font-weight: bold;
+    color: var(--cor-principal); /* Cor de destaque roxa */
+}
+.stat span:last-child {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario); /* Texto secundário para o label */
+}
+
+.details-right .synopsis {
+    margin-bottom: 1.5rem;
+}
+
+.details-right .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-item {
+    background-color: var(--cor-fundo); /* Fundo um pouco diferente para destacar */
+    padding: 0.8rem;
+    border-radius: 5px;
+    border: 1px solid var(--cor-borda);
+}
+.info-item strong {
+    color: var(--cor-principal); /* Cor de destaque roxa */
+}
+
+.trailer-container {
+    margin-top: 2rem;
+}
+.trailer-container iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: 8px;
+}

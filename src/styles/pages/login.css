@@ -203,13 +203,6 @@ header .header-logo svg:hover {
         transform: scale(1.05);
 }
 
-/* --- RODAPÉ --- */
-.footer {
-    text-align: center;
-    padding: 40px 0;
-    color: var(--cor-texto-secundario);
-    border-top: 1px solid var(--cor-superficie);
-}
 
 /* --- MODAL DE LOGIN --- */
 .modal-overlay {

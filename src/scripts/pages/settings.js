@@ -1,9 +1,8 @@
 // IMPORTAÇÕES
-import { auth, db } from '/js/firebase-init.js';
+import { auth, db } from '/src/scripts/config/firebase-init.js';
 
 import { 
     onAuthStateChanged,
-    signOut,
     updateProfile, 
     EmailAuthProvider, 
     reauthenticateWithCredential, 
@@ -42,7 +41,7 @@ const modalOverlay = document.getElementById('customModalOverlay');
 const modalTitle = document.getElementById('modalTitle');
 const modalBody = document.getElementById('modalBody');
 const modalInputWrapper = document.getElementById('modalInputWrapper');
-const modalInput = document.getElementById('modalInput');
+const modalInput = document.getElementById('modalInputSenha');
 const modalConfirmBtn = document.getElementById('modalConfirmBtn');
 const modalCancelBtn = document.getElementById('modalCancelBtn');
 
@@ -63,16 +62,11 @@ const defaultFilterSelect = document.getElementById('defaultFilter');
 const deleteAllItemsBtn = document.getElementById('deleteAllItemsBtn');
 const deleteAllStatus = document.getElementById('deleteAllStatus');
 
-// Modal perfil
-const botaoPerfil = document.querySelector('.button-perfil');
-const perfil = document.querySelector('.perfil-dropdown');
 
 // atualizar nome e foto 
 const userNameElements = document.querySelectorAll(".userName");
 const userImageElements = document.querySelectorAll(".userProfilePicture");
 
-//botao sair
-const botaoSair = document.getElementById('btn-sair');
 
 
 let currentUser = null;
@@ -82,7 +76,6 @@ let resolveModalPromise;
 onAuthStateChanged(auth, (user) => {
     if (user) {
         currentUser = user;
-        atualizarUsuarioUI(user);
     
         displayNameInput.value = user.displayName || '';
         photoURLInput.value = user.photoURL || '';
@@ -173,16 +166,6 @@ function loadSettingsAparencia() {
 
     defaultSortSelect.value = savedSort;
     defaultFilterSelect.value = savedFilter;
-}
-
-function atualizarUsuarioUI(user) {
-  userNameElements.forEach(el => {
-    el.textContent = user.displayName || "";
-  });
-
-  userImageElements.forEach(el => {
-    el.src = user.photoURL || "/assets/img/semimagem.jpg";
-  });
 }
 
 
@@ -337,6 +320,7 @@ deleteAccountBtn.addEventListener('click', async () => {
     const password = await showPasswordPromptModal();
     if (!password) { 
         deleteStatus.textContent = 'A exclusão foi cancelada.';
+        deleteStatus.style.color = 'red';
         return;
     }
     
@@ -351,7 +335,7 @@ deleteAccountBtn.addEventListener('click', async () => {
 
         deleteStatus.textContent = 'Sua conta foi permanentemente apagada. Sentiremos sua falta!';
         deleteStatus.style.color = 'red';
-        window.location.href = '/login.html'; 
+        window.location.href = '/src/pages/login.html'; 
 
     } catch (error) {
         console.error("Erro ao apagar a conta:", error);
@@ -401,6 +385,40 @@ modalCancelBtn.addEventListener('click', () => {
     hideModal();
 });
 
+// trocar abas 
+document.addEventListener('DOMContentLoaded', () => {
+
+    const links = document.querySelectorAll('.settings-sidebar .nav-link');
+
+    links.forEach(link => {
+        link.addEventListener('click', (event) => {
+            // Impede a ação padrão do link
+            event.preventDefault();
+
+            // Pega o ID da aba do atributo 'data-tab'
+            const tabId = event.currentTarget.dataset.tab;
+
+            // Remove a classe 'active' de todas as abas
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            
+            // Remove a classe 'active' de todos os links
+            links.forEach(navLink => navLink.classList.remove('active'));
+            
+            // Adiciona a classe 'active' na aba e no link clicados
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        });
+    });
+
+    // Opcional: Para garantir que a aba inicial 'ativa' seja exibida corretamente ao carregar a página
+    const initialActiveLink = document.querySelector('.settings-sidebar .nav-link.active');
+    if (initialActiveLink) {
+        const initialTabId = initialActiveLink.dataset.tab;
+        document.getElementById(initialTabId).classList.add('active');
+    }
+});
+
+
 // 3. EVENTOS QUE SALVAM AS ESCOLHAS DO USUÁRIO
 accentColorSelect.addEventListener('change', (event) => {
     const newColor = event.target.value;
@@ -440,78 +458,10 @@ defaultFilterSelect.addEventListener('change', (event) => {
     localStorage.setItem('list_default_filter', event.target.value);
 });
 
-//modal botao perfil
-botaoPerfil.addEventListener('click', (e) => {
-    e.stopPropagation(); 
-    perfil.classList.toggle('perfil-dropdown-active');
-});
-
-document.addEventListener('click', (e) => {
-    if (!perfil.contains(e.target) && !botaoPerfil.contains(e.target)) {
-        perfil.classList.remove('perfil-dropdown-active');
-    }
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    const currentPagePath = window.location.pathname;
-    const navLinks = document.querySelectorAll('.perfil-config');
-    
-    navLinks.forEach(link => {
-      const linkPath = link.getAttribute('href');
-      if (currentPagePath.endsWith(linkPath)) {
-        link.classList.add('ativo');
-      }
-    });
-});
-
-//botao sair da conta
-botaoSair.addEventListener("click", () => {
-    signOut(auth)
-      .then(() => {
-        window.location.href = "/login.html";
-      })
-      .catch((error) => {
-        console.error("Erro ao sair:", error);
-      });
-});
-
-// trocar abas 
-document.addEventListener('DOMContentLoaded', () => {
-
-    const links = document.querySelectorAll('.settings-sidebar .nav-link');
-
-    links.forEach(link => {
-        link.addEventListener('click', (event) => {
-            // Impede a ação padrão do link
-            event.preventDefault();
-
-            // Pega o ID da aba do atributo 'data-tab'
-            const tabId = event.currentTarget.dataset.tab;
-
-            // Remove a classe 'active' de todas as abas
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            
-            // Remove a classe 'active' de todos os links
-            links.forEach(navLink => navLink.classList.remove('active'));
-            
-            // Adiciona a classe 'active' na aba e no link clicados
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        });
-    });
-
-    // Opcional: Para garantir que a aba inicial 'ativa' seja exibida corretamente ao carregar a página
-    const initialActiveLink = document.querySelector('.settings-sidebar .nav-link.active');
-    if (initialActiveLink) {
-        const initialTabId = initialActiveLink.dataset.tab;
-        document.getElementById(initialTabId).classList.add('active');
-    }
-});
-
-
-
 
 loadSettingsAparencia();
+
+
 
 // ===================================================================
 // LÓGICA PARA EXPORTAÇÃO DE DADOS
@@ -777,6 +727,7 @@ if (deleteAllItemsBtn) {
             );
             if (!firstConfirm) {
                 deleteAllStatus.textContent = 'Ação cancelada.';
+                deleteAllStatus.style.color = 'red';
                 return;
             }
 
@@ -784,6 +735,7 @@ if (deleteAllItemsBtn) {
             const password = await showPasswordPromptModal();
             if (!password) {
                 deleteAllStatus.textContent = 'Senha não fornecida. Ação cancelada.';
+                deleteAllStatus.style.color = 'red';
                 return;
             }
 
@@ -796,7 +748,7 @@ if (deleteAllItemsBtn) {
             
             // --- PASSO 3: LÓGICA DE EXCLUSÃO EM LOTE ---
             deleteAllStatus.textContent = 'Autenticação OK. Apagando todos os itens...';
-            
+            deleteAllStatus.style.color = 'green';
             const animesCollectionRef = collection(db, "users", currentUser.uid, "animes");
             const snapshot = await getDocs(animesCollectionRef);
 
