@@ -13,12 +13,12 @@
 .search-container h1 {
     font-size: 2.8rem;
     margin-bottom: 0.5rem;
-    color: var(--cor-texto); /* Usa a cor de texto principal */
+    color: var(--cor-texto); 
 }
 
 .search-container p {
     font-size: 1.1rem;
-    color: var(--cor-texto-secundario); /* Cor de texto mais suave */
+    color: var(--cor-texto-secundario); 
     margin-bottom: 2rem;
 }
 
@@ -32,14 +32,37 @@
     flex-grow: 1;
     padding: 0.8rem 1rem;
     font-size: 1rem;
-    border: 2px solid var(--cor-borda); /* Borda padrão */
+    border: 2px solid var(--cor-borda); 
     border-radius: 8px 0 0 8px;
-    background-color: var(--cor-superficie); /* Fundo branco/superfície */
-    color: var(--cor-texto); /* Texto escuro */
+    background-color: var(--cor-superficie); 
+    color: var(--cor-texto);
     outline: none;
 }
+
 #search-input:focus {
-    border-color: var(--cor-principal); /* Borda roxa ao focar */
+    border-color: var(--cor-principal); 
+}
+
+#search-input:not(:placeholder-shown) {
+  background-color: var(--cor-superficie);
+  border-color: var(--cor-principal); 
+}
+
+#search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--cor-texto) !important; 
+
+    box-shadow: 0 0 0 1000px var(--cor-superficie) inset !important;
+    
+    caret-color: var(--cor-texto) !important; 
 }
 
 #search-form button {
@@ -48,13 +71,14 @@
     font-weight: bold;
     cursor: pointer;
     border: none;
-    background-color: var(--cor-principal); /* Roxo */
-    color: #ffffff; /* Texto branco para melhor contraste com o roxo */
+    background-color: var(--cor-principal); 
+    color: var(--cor-texto); 
     border-radius: 0 8px 8px 0;
     transition: background-color 0.3s ease;
 }
+
 #search-form button:hover {
-    background-color: var(--cor-principal-hover); /* Roxo mais escuro no hover */
+    background-color: var(--cor-principal-hover); 
 }
 
 #results-container {
@@ -64,7 +88,7 @@
     text-align: center;
     font-size: 1.2rem;
     padding: 4rem 0;
-    color: var(--cor-texto-secundario); /* Cor suave para mensagens */
+    color: var(--cor-texto-secundario); 
 }
 
 .search-results-grid {
@@ -74,17 +98,17 @@
 }
 
 .result-card {
-    background-color: var(--cor-superficie); /* Fundo branco */
+    background-color: var(--cor-superficie);
     border-radius: 8px;
     overflow: hidden;
     text-align: center;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid var(--cor-borda); /* Borda sutil para destacar do fundo */
+    border: 1px solid var(--cor-borda);
 }
 .result-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Sombra suave no hover */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 .result-card img {
     width: 100%;
@@ -95,16 +119,16 @@
     padding: 1rem;
     font-size: 1rem;
     font-weight: 500;
-    color: var(--cor-texto); /* Garante que o texto do card seja o principal */
+    color: var(--cor-texto);
 }
 
 .anime-details-container {
     display: flex;
     gap: 2rem;
-    background-color: var(--cor-superficie); /* Fundo branco para a área de detalhes */
+    background-color: var(--cor-superficie);
     padding: 2rem;
     border-radius: 8px;
-    border: 1px solid var(--cor-borda); /* Borda sutil */
+    border: 1px solid var(--cor-borda);
 }
 
 .details-left {
@@ -128,7 +152,7 @@
     gap: 1.5rem;
     margin-bottom: 1.5rem;
     flex-wrap: wrap;
-    border-bottom: 1px solid var(--cor-borda); /* Linha divisória sutil */
+    border-bottom: 1px solid var(--cor-borda);
     padding-bottom: 1rem;
 }
 .stat {
@@ -137,11 +161,11 @@
 }
 .stat span:first-child {
     font-weight: bold;
-    color: var(--cor-principal); /* Cor de destaque roxa */
+    color: var(--cor-principal);
 }
 .stat span:last-child {
     font-size: 0.9rem;
-    color: var(--cor-texto-secundario); /* Texto secundário para o label */
+    color: var(--cor-texto-secundario);
 }
 
 .details-right .synopsis {
@@ -156,13 +180,13 @@
 }
 
 .info-item {
-    background-color: var(--cor-fundo); /* Fundo um pouco diferente para destacar */
+    background-color: var(--cor-fundo);
     padding: 0.8rem;
     border-radius: 5px;
     border: 1px solid var(--cor-borda);
 }
 .info-item strong {
-    color: var(--cor-principal); /* Cor de destaque roxa */
+    color: var(--cor-principal);
 }
 
 .trailer-container {

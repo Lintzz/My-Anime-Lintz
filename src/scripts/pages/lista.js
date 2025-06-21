@@ -139,7 +139,7 @@ function renderizarListaFiltradaEOrdenada() {
 function exibirAnimes(animes) {
     listaAnimes.innerHTML = '';
     if (animes.length === 0) {
-        listaAnimes.innerHTML = '<p class="lista-vazia-msg">Nenhum anime encontrado com os filtros selecionados.</p>';
+        listaAnimes.innerHTML = '<p class="lista-vazia-msg">Nenhum anime encontrado.</p>';
         return;
     }
     animes.forEach(anime => CriarCardAnime(anime));
@@ -319,6 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // BOTAO ADICIONAR 
   botaoAdicionar.addEventListener("click", () => {
     let imagemCapa = '';
+    listaAnimes.innerHTML = '';
     if (!nomesCarregados) {
       showAlert("Aguarde, carregando lista de animes...");
       return;
@@ -455,7 +456,11 @@ document.addEventListener("DOMContentLoaded", () => {
       atualizarCorStatus(val, totalEps, corstatus);
     });
     
-    novoCard.querySelector(".cancelar-novo").addEventListener("click", () => { novoCard.remove(); });
+    novoCard.querySelector(".cancelar-novo").addEventListener("click", () => {
+      novoCard.remove();
+      listaAnimes.innerHTML = '<p class="lista-vazia-msg">Nenhum anime encontrado.</p>';
+    
+    });
 
     novoCard.querySelector(".salvar-novo").addEventListener("click", async () => {
       const nomeInput = inputNome.value.trim();

@@ -9,7 +9,7 @@ body.hide-progress-bar .corstatus {
 main{
     display: flex;
     flex-direction: column;
-
+    min-height: 100vh;
 }
 
 main .acoes{
@@ -593,9 +593,11 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* msg*/
 .carregando-msg, .lista-vazia-msg, .erro-msg{
-    color: white;
+    color: var(--cor-principal);
     font-weight: bold;
     font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
 }
 
 /* barra de pesquisa */

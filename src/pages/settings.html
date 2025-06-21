@@ -29,7 +29,7 @@
 
         <nav>
             <a href="/src/pages/inicio.html">Início</a>
-            <a href="/src/pages/dashboard.html">Lista</a>
+            <a href="/src/pages/lista.html">Lista</a>
             <a href="/src/pages/buscar.html">Buscar</a>
             <a href="/src/pages/descobrir.html">Descobrir</a>
         </nav>
@@ -76,20 +76,6 @@
             <div class="settings-content">
                 <div id="conta" class="tab-content active">
                     <div class="setting-section">
-                        <h3>Suas Informações</h3>
-                        <div class="form-group">
-                            <label for="displayName">Nome de Exibição</label>
-                            <input type="text" id="displayName" placeholder="Carregando..." disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="photoURL">URL da Foto de Perfil</label>
-                            <input type="text" id="photoURL" placeholder="Carregando..." disabled>
-                        </div>
-                        <button class="button-settings" id="saveProfileButton" disabled>Salvar Alterações</button>
-                        <p id="profileStatus" class="status-message"></p>
-                    </div>
-
-                    <div class="setting-section">
                         <h3>Segurança</h3>
                         <div class="form-group">
                             <label for="currentPassword">Senha Atual</label>
@@ -128,16 +114,16 @@
                     </div>
 
                     <div class="setting-section">
-                        <h3>Zona de Perigo</h3>
+                        <h3>Apagar TODA a Minha Lista</h3>
                         <p>Apague todos os itens da sua lista de animes. Isso não afeta sua conta.</p>
-                        <button  id="deleteAllItemsBtn" class="button-settings destructive">Apagar TODA a Minha Lista</button>
+                        <button  id="deleteAllItemsBtn" class="button-settings destructive">Apagar</button>
                         <p id="deleteAllStatus" class="status-message"></p>
                     </div>
 
                     <div class="setting-section">
-                        <h3>Zona de Perigo</h3>
+                        <h3>Apagar Minha Conta</h3>
                         <p>Esta ação é irreversível. Todos os seus dados, incluindo sua lista de animes e configurações, serão permanentemente apagados.</p>
-                        <button id="deleteAccountBtn" class="button-settings destructive" disabled>Apagar Minha Conta</button>
+                        <button id="deleteAccountBtn" class="button-settings destructive" disabled>Apagar</button>
                         <p id="deleteStatus" class="status-message"></p>
                     </div>
 

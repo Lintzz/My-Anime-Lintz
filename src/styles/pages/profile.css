@@ -58,6 +58,29 @@
 }
 .profile-container .follow-btn:hover { background-color: var(--cor-principal-hover); }
 
+#edit-profile-btn{
+    background-color: var(--cor-principal);
+    border: none;
+    height: 32px;
+    width: 32px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#edit-profile-btn:hover {
+    background-color: var(--cor-principal-hover);
+}
+
+#edit-profile-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+    color: var(--cor-texto);
+    transition: color 0.2s ease;
+}
+
 .profile-container .profile-info-x { margin-top: 10px; }
 .profile-container .profile-info-x h1 { font-size: 1.7rem; font-weight: 700; }
 .profile-container .profile-info-x .handle { font-size: 1rem; color: var(--cor-texto-secundario); }
@@ -94,11 +117,11 @@
     padding: 10px; border-radius: 8px;
     background-color: var(--cor-superficie); border: 1px solid var(--cor-borda);
 }
-.profile-container #genre-list { 
+.profile-container #favorite-genres-list { 
     list-style: none; padding: 0; margin: 0;
     display: contents;
 }
-.profile-container #genre-list li {
+.profile-container #favorite-genres-list li {
     display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px;
     background-color: var(--cor-fundo); border: 1px solid var(--cor-borda);
     border-radius: 20px; font-size: 0.9rem;
@@ -139,3 +162,11 @@
     transition: all 0.2s; margin: 0 10px;
 }
 .profile-container .social-links a:hover { color: var(--cor-principal); }
+
+.ConfigSeguir {
+    display: flex;
+    gap: 10px;
+}
+
+
+

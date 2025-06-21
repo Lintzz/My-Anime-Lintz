@@ -3,7 +3,6 @@ import { auth, db } from '/src/scripts/config/firebase-init.js';
 
 import { 
     onAuthStateChanged,
-    updateProfile, 
     EmailAuthProvider, 
     reauthenticateWithCredential, 
     updatePassword,
@@ -11,13 +10,6 @@ import {
     deleteUser 
 } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
 import { collection, getDocs, writeBatch, doc } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js";
-
-
-// Referências da seção de Perfil
-const displayNameInput = document.getElementById('displayName');
-const photoURLInput = document.getElementById('photoURL');
-const saveProfileButton = document.getElementById('saveProfileButton');
-const profileStatus = document.getElementById('profileStatus');
 
 // Referências da seção de Segurança
 const currentPasswordInput = document.getElementById('currentPassword');
@@ -76,13 +68,7 @@ let resolveModalPromise;
 onAuthStateChanged(auth, (user) => {
     if (user) {
         currentUser = user;
-    
-        displayNameInput.value = user.displayName || '';
-        photoURLInput.value = user.photoURL || '';
-        displayNameInput.disabled = false;
-        photoURLInput.disabled = false;
-        saveProfileButton.disabled = false;
-    
+
         currentEmailDisplay.textContent = user.email;
         newEmailInput.disabled = false;
         changeEmailBtn.disabled = false;
@@ -103,10 +89,6 @@ onAuthStateChanged(auth, (user) => {
 
     } else {
         currentUser = null;
-        profileStatus.textContent = 'Você precisa fazer login para ver suas configurações.';
-        displayNameInput.disabled = true;
-        photoURLInput.disabled = true;
-        saveProfileButton.disabled = true;
     }
 });
 
@@ -167,34 +149,6 @@ function loadSettingsAparencia() {
     defaultSortSelect.value = savedSort;
     defaultFilterSelect.value = savedFilter;
 }
-
-
-//  SALVAR PERFIL 
-saveProfileButton.addEventListener('click', async () => {
-    if (!currentUser) return;
-
-    const newDisplayName = displayNameInput.value;
-    const newPhotoURL = photoURLInput.value;
-
-    profileStatus.textContent = 'Salvando...';
-    profileStatus.style.color = '#333';
-    saveProfileButton.disabled = true;
-
-    try {
-        await updateProfile(currentUser, {
-            displayName: newDisplayName,
-            photoURL: newPhotoURL
-        });
-        profileStatus.textContent = 'Perfil salvo com sucesso!';
-        profileStatus.style.color = 'green';
-    } catch (error) {
-        console.error("Erro ao atualizar o perfil:", error);
-        profileStatus.textContent = `Erro: ${error.message}`;
-        profileStatus.style.color = 'red';
-    } finally {
-        saveProfileButton.disabled = false;
-    }
-});
 
 //  ALTERAR SENHA 
 changePasswordBtn.addEventListener('click', async () => {
@@ -586,6 +540,40 @@ function handleFileSelect(event) {
 // Função para adicionar um pequeno atraso
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// FUNÇÃO PARA PROCESSAR O JSON DE EXPORTAÇÃO
+async function processJsonFile(file) {
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+        try {
+            // 1. Pega o conteúdo do arquivo como texto
+            const fileContent = e.target.result;
+
+            // 2. Converte a string JSON em um array de objetos
+            const animes = JSON.parse(fileContent);
+
+            // 3. Validação simples para garantir que o arquivo não está vazio ou mal formatado
+            if (!Array.isArray(animes) || animes.length === 0) {
+                importStatus.textContent = 'O arquivo JSON está vazio ou não contém uma lista de animes.';
+                importStatus.style.color = 'red';
+                return;
+            }
+
+            // 4. Se tudo deu certo, envia os dados para o Firestore
+            // A função uploadAnimesToFirestore já existe e pode ser reutilizada aqui!
+            await uploadAnimesToFirestore(animes);
+
+        } catch (error) {
+            console.error("Erro ao processar arquivo JSON:", error);
+            importStatus.textContent = 'Erro: O arquivo JSON parece estar corrompido ou mal formatado.';
+            importStatus.style.color = 'red';
+        }
+    };
+
+    // Lê o arquivo como texto, pois JSON é um formato de texto
+    reader.readAsText(file);
 }
 
 // PROCESSADOR PARA ARQUIVOS .XML.GZ (MYANIMELIST) - VERSÃO MELHORADA
