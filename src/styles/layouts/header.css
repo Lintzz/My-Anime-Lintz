@@ -63,7 +63,6 @@ header nav a:hover {
 
 .perfil-container {
     position: relative;
-    margin-left: auto;
     display: inline-block;
     height: 100%;
     
@@ -249,4 +248,149 @@ header nav a:hover {
     width: 40px;  
     height: 1em;  
     border-radius: 4px;
+}
+
+/* notificao pedido de amizade */
+.notificacao-container {
+    position: relative; 
+    cursor: pointer;
+    margin-left: auto;
+    padding-right: 10px;
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: 2px;
+    
+    height: 18px;
+    min-width: 18px;
+    padding:2px 6px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+
+    background-color: var(--cor-destrutiva);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1; 
+    border-radius: 10px;
+    border: 2px solid var(--cor-superficie); 
+    z-index: 1; 
+}
+
+.dropdown-painel {
+    display: none; 
+    position: absolute;
+    top: 250%; 
+    right: 0;
+    width: 400px;
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow: hidden; 
+}
+
+/* Classe que o JavaScript vai adicionar para mostrar o dropdown */
+.dropdown-painel.visivel {
+    display: block;
+}
+
+/* Header do dropdown */
+.dropdown-header {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.dropdown-header h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* A lista de notificações */
+#lista-notificacoes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px; /* Altura máxima antes de aparecer a barra de rolagem */
+    overflow-y: auto;
+}
+
+/* Cada item individual na lista */
+.notificacao-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    transition: background-color 0.2s ease-in-out;
+    gap: 10px;
+}
+
+.notificacao-item:not(:last-child) {
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.notificacao-item:hover {
+    background-color: var(--cor-fundo);
+}
+
+.notificacao-item img {
+    min-width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.notificacao-texto {
+    flex-grow: 1; /* Faz o texto ocupar o espaço disponível */
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+}
+
+.notificacao-texto strong {
+    color: var(--cor-texto);
+}
+
+/* Container para os botões de ação */
+.notificacao-acoes {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Estilo base para os botões de notificação */
+.notificacao-acoes button {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.notificacao-acoes button:hover {
+    opacity: 0.8;
+}
+
+/* Botão de aceitar */
+.btn-aceitar {
+    background-color: var(--cor-principal);
+    color: white;
+}
+
+/* Botão de recusar */
+.btn-recusar {
+    background-color: var(--cor-borda);
+    color: var(--cor-texto-secundario);
+}
+
+/* Mensagem para quando a lista está vazia */
+.estado-vazio {
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--cor-texto-secundario);
 }

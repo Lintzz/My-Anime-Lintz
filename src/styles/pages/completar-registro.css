@@ -1,0 +1,174 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+}
+
+/* --- CARD DE PERFIL --- */
+.profile-card {
+    background: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.profile-card h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--cor-texto);
+}
+
+.profile-card .subtitle {
+    font-size: 1rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 2rem;
+}
+
+/* --- SEÇÃO DE AVATAR --- */
+.avatar-preview-container {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1rem auto; /* Diminuí a margem inferior */
+}
+
+#avatar-preview {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--cor-borda);
+    background-color: var(--cor-fundo);
+}
+
+/* --- FORMULÁRIO --- */
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: var(--font-principal);
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--cor-principal);
+}
+
+.form-group .hint {
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario);
+    margin-top: 0.5rem;
+}
+
+/* --- INPUT DE USUÁRIO COM @ --- */
+.username-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    transition: border-color 0.2s;
+}
+
+.username-input-wrapper:focus-within {
+    border-color: var(--cor-principal);
+}
+
+.username-input-wrapper span {
+    padding: 0 0.75rem;
+    color: var(--cor-texto-secundario);
+    font-size: 1rem;
+}
+
+.username-input-wrapper input {
+    border: none;
+    flex-grow: 1;
+}
+.username-input-wrapper input:focus {
+    border-color: transparent;
+}
+
+/* --- MENSAGENS DE STATUS DO USERNAME --- */
+#username-status {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding-top: 0.5rem;
+    min-height: 20px;
+}
+
+#username-status.checking {
+    color: var(--cor-texto-secundario);
+}
+#username-status.unavailable {
+    color: var(--cor-destrutiva);
+}
+#username-status.available {
+    color: var(--cor-sucesso);
+}
+
+/* --- BOTÃO E SPINNER --- */
+#salvar-perfil-btn {
+    width: 100%;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 8px;
+    background: var(--cor-principal);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+#salvar-perfil-btn:hover {
+    background: var(--cor-principal-hover);
+}
+
+#salvar-perfil-btn:disabled {
+    background: var(--cor-texto-secundario);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+.hidden {
+    display: none;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

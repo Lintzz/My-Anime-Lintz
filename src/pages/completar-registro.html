@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete seu Perfil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/src/styles/global.css">
+    <link rel="stylesheet" href="/src/styles/pages/completar-registro.css">
+</head>
+<body>
+
+    <main class="container">
+        <div class="profile-card">
+            <h1>Falta pouco!</h1>
+            <p class="subtitle">Personalize seu perfil para começar.</p>
+
+            <form id="complete-profile-form" onsubmit="return false;">
+
+                <div class="avatar-preview-container">
+                    <img id="avatar-preview" src="/src/assets/img/semimagem.jpg" alt="Pré-visualização do avatar">
+                </div>
+                
+                <div class="form-group">
+                    <label for="avatar-url-input">URL da Foto de Perfil</label>
+                    <input type="url" id="avatar-url-input" placeholder="https://exemplo.com/sua-foto.png">
+                </div>
+
+                <div class="form-group">
+                    <label for="nome-input">Nome de Exibição</label>
+                    <input type="text" id="nome-input" placeholder="Como você quer ser chamado?">
+                </div>
+
+                <div class="form-group">
+                    <label for="username-input">Nome de Usuário</label>
+                    <div class="username-input-wrapper">
+                        <span>@</span>
+                        <input type="text" id="username-input" placeholder="ex: joaosilva10" autocapitalize="none">
+                    </div>
+                    <div id="username-status"></div>
+                </div>
+
+                <button type="submit" id="salvar-perfil-btn">
+                    <span class="btn-text">Salvar e Continuar</span>
+                    <div class="spinner hidden"></div>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script src="/src/scripts/core/settings-manager.js"></script>
+    <script type="module" src="/src/scripts/global.js"></script>  
+    <script type="module" src="/src/scripts/pages/completar-registro.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,34 @@
+-- Geral
+
+criar graficos, ranking geral e amigos
+
+VOLTAR ARRUMANDO TODAS IMAGENS DO HTML
+
+melhor deixar a importacao da fonte no html com o goole ou baixar a fonte e deixar no projeto
+
+-- Perfil
+
+Colocar uma opção de print do perfil para a pessoa poder compartilhar
+
+lugar para a possoa colocar o link das redes sociais dela
+
+gerar um json dos personagens e colocar para aparecer uma busca quando clicar no input de personagem com base nos nomes nesse json
+
+quando eu olho um perfil vazio parece que ele ta falando comigo (adicione um anime, etc. isso era para ser so com o dono) quem ta olhando deve ser tipo, (vazio)
+
+como abro o perfil carrega o html, colocar um esqueleto para parecer que esta carregando 
+
+--Detalhes
+
+em descobrir colocar opcao de adicionar o anime na sua lista
+
+em buscar colocar opcao de adicionar o anime na lista
+
+em config colocar para abilitar/desabilitar conteudo 18+ (descobrir aparece uns hentai do nada kk) (desabilitar generos que contem Hentai)
+
+quando apago a conta nao paga o perfil no firabesae e acho que o @tambem nao
+
+
+-- Lista
+
+Quando adicicionar, some ou nao a lista?

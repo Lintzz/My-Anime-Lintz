@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurações - My Anime Lintz</title>
+    <title>Meus Amigos</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/src/styles/global.css">
-    <link rel="stylesheet" href="/src/styles/pages/settings.css">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+    <link rel="stylesheet" href="/src/styles/pages/amigos.css">
+
 </head>
-<body class="dark-theme">
+<body>
     <header>
         <div class="header-logo">
             <a href="/">
@@ -82,198 +81,41 @@
             </div>
         </div>
     </header>
+    <main class="page-container">
+        <h1>Encontrar e Gerenciar Amigos</h1>
 
-    <main class="main-content container">
-        <div class="settings-container">
-            <nav class="settings-sidebar">
-                <a href="#" class="nav-link active" data-tab="conta"><i class="fas fa-user-circle"></i> Conta</a>
-                <a href="#" class="nav-link" data-tab="aparencia"><i class="fas fa-palette"></i> Aparência</a>
-                <a href="#" class="nav-link" data-tab="lista"><i class="fas fa-list-ul"></i> Lista</a>
-                <a href="#" class="nav-link" data-tab="dados"><i class="fas fa-database"></i> Dados</a>
-                <a href="#" class="nav-link" data-tab="sobre"><i class="fas fa-info-circle"></i> Sobre</a>
-            </nav>
+        <form id="search-users-form" class="search-container">
+            <input type="search" id="search-input" placeholder="Procurar novos amigos por @username..." autocomplete="off">
+            <button type="submit">Buscar</button>
+        </form>
 
-            <div class="settings-content">
-                <div id="conta" class="tab-content active">
-                    <div class="setting-section">
-                        <h3>Segurança</h3>
-                        <div class="form-group">
-                            <label for="currentPassword">Senha Atual</label>
-                            <div class="password-wrapper">
-                                <input type="password" id="currentPassword" placeholder="********">
-                                <i class="toggle-password fas fa-eye" data-target="#currentPassword"></i>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="newPassword">Nova Senha</label>
-                            <div class="password-wrapper">
-                                <input type="password" id="newPassword">
-                                <i class="toggle-password fas fa-eye" data-target="#newPassword"></i>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirmNewPassword">Confirmar Nova Senha</label>
-                             <div class="password-wrapper">
-                                <input type="password" id="confirmNewPassword">
-                                <i class="toggle-password fas fa-eye" data-target="#confirmNewPassword"></i>
-                            </div>
-                        </div>
-                        <button class="button-settings" class="button-settings" id="changePasswordBtn">Alterar Senha</button>
-                        <p id="passwordStatus" class="status-message"></p>
-                    </div>
-
-                    <div class="setting-section">
-                        <h3>Alterar E-mail</h3>
-                        <p>Seu endereço de e-mail atual é <strong id="currentEmailDisplay">carregando...</strong>. Enviaremos um link de confirmação para o seu novo endereço.</p>
-                        <div class="form-group">
-                            <label for="newEmail">Novo E-mail</label>
-                            <input type="email" id="newEmail" placeholder="seu-novo-email@provedor.com" disabled>
-                        </div>
-                        <button class="button-settings" id="changeEmailBtn" disabled>Enviar Confirmação de E-mail</button>
-                        <p id="emailStatus" class="status-message"></p>
-                    </div>
-
-                    <div class="setting-section">
-                        <h3>Apagar TODA a Minha Lista</h3>
-                        <p>Apague todos os itens da sua lista de animes. Isso não afeta sua conta.</p>
-                        <button  id="deleteAllItemsBtn" class="button-settings destructive">Apagar</button>
-                        <p id="deleteAllStatus" class="status-message"></p>
-                    </div>
-
-                    <div class="setting-section">
-                        <h3>Apagar Minha Conta</h3>
-                        <p>Esta ação é irreversível. Todos os seus dados, incluindo sua lista de animes e configurações, serão permanentemente apagados.</p>
-                        <button id="deleteAccountBtn" class="button-settings destructive" disabled>Apagar</button>
-                        <p id="deleteStatus" class="status-message"></p>
-                    </div>
-
-                   
-                </div>
-
-                <div id="aparencia" class="tab-content">
-                    <div class="setting-section">
-                        <h3>Personalização</h3>
-                        <div class="form-group">
-                            <label for="accentColor">Cor de Destaque</label>
-                            <select id="accentColor">
-                                <option value="#6a3de8">Roxo (Padrão)</option>
-                                <option value="#3498db">Azul</option>
-                                <option value="#e74c3c">Vermelho</option>
-                                <option value="#2ecc71">Verde</option>
-                                <option value="#f1c40f">Amarelo</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="themeSelector">Tema</label>
-                            <select id="themeSelector">
-                                <option value="dark">Dark (Padrão)</option>
-                                <option value="light">Light</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="defaultView">Visualização Padrão da Lista</label>
-                            <select id="defaultView">
-                                <option value="list">List (Padrão)</option>
-                                <option value="grid">Grid</option>     
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="setting-section">
-                        <h3>Informações nos Cards</h3>
-                        <p>Escolha quais informações devem ser visíveis nos cards da sua lista de animes.</p>
-                        <div class="toggle-switch">
-                            <strong>Mostrar barra de progresso</strong>
-                            <label class="switch"><input type="checkbox" id="toggleProgressBar" checked><span class="slider"></span></label>
-                        </div>
-                        <div class="toggle-switch">
-                            <strong>Mostrar seu score do anime</strong>
-                            <label class="switch"><input type="checkbox" id="toggleScore" checked><span class="slider"></span></label>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="lista" class="tab-content">
-                    <div class="setting-section">
-                        <h3>Padrões da Lista</h3>
-                        <div class="form-group">
-                            <label for="defaultSort">Ordenação Padrão</label>
-                            <select id="defaultSort">
-                                <option value="recent">Adicionado Recentemente</option>
-                                <option value="az">Ordem Alfabética (A-Z)</option>
-                                <option value="za">Ordem Alfabética (Z-A)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="defaultFilter">Filtro de Status Padrão</label>
-                            <select id="defaultFilter">
-                                <option value="todos">Todos</option>
-                                <option value="to_vendo">Assistindo</option>
-                                <option value="terminei">Terminei</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="dados" class="tab-content">
-                     <div class="setting-section">
-                        <h3>Backup de Dados</h3>
-                        <p>Faça o download de todos os seus dados (lista de animes, scores, progresso) em um arquivo JSON. Guarde-o como um backup pessoal.</p>
-                        <button class="button-settings" id="exportDataBtn">Exportar Meus Dados</button>
-                        <p id="exportStatus" class="status-message"></p>
-                     </div>
-                      <div class="setting-section">
-                        <h3>Importar Dados</h3>
-                        <p>Adicione animes à sua lista a partir de um arquivo compatível (ex: exportado do MyAnimeList ou um backup anterior).</p>
-                        <button class="button-settings" id="importBtn">Importar Arquivo</button>
-                        <input type="file" id="importFile" style="display: none;" accept=".json,.xml,.gz">
-                        <p id="importStatus" class="status-message"></p>
-                    </div>
-                 </div>
-
-                <div id="sobre" class="tab-content">
-                     <div class="setting-section">
-                        <h3>Sobre o My Anime Lintz</h3>
-                        <p><strong>Versão:</strong> 1.0.0 (Beta)</p>
-                        <p>My Anime Lintz é um projeto de código aberto feito para ajudar você a organizar e acompanhar seus animes favoritos de forma simples e moderna.</p>
-                        <p>Dados de animes e imagens são fornecidos pela API pública e gratuita <a href="https://jikan.moe" target="_blank" rel="noopener noreferrer">Jikan.moe</a>.</p>
-                    </div>
-                     <div class="setting-section">
-                        <h3>Suporte e Contribuição</h3>
-                        <p>Encontrou um problema, tem uma sugestão ou quer ajudar no desenvolvimento?</p>
-                        <button class="button-settings" onclick="window.open('https://github.com/Lintzz')">Ver no GitHub</button>
-                    </div>
-                 </div>
+        <div id="search-results-container" class="hidden">
+            <h2>Resultados da Busca</h2>
+            <ul id="search-results-list" class="grid-amigos"></ul>
+            <div id="search-empty-state" class="empty-state hidden">
+                <p>Nenhum usuário encontrado com esse @username.</p>
             </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Sua Lista de Amigos</h2>
+        
+        <div id="loading-state" class="loading-state">
+            <div class="spinner"></div>
+            <p style="margin-top: 1rem;">Carregando sua lista de amigos...</p>
+        </div>
+
+        <ul id="lista-de-amigos" class="grid-amigos"></ul>
+        
+        <div id="amigos-vazio" class="empty-state hidden">
+            <p>Você ainda não tem amigos. Procure por pessoas para adicionar!</p>
         </div>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 My Anime Lintz. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <div id="customModalOverlay" class="modal-overlay">
-        <div class="modal-content">
-            <h3 id="modalTitle" class="modal-title">Confirmação Necessária</h3>
-            <p id="modalBody" class="modal-body">Para continuar, por favor, insira sua senha.</p>
-            
-            <div id="modalInputWrapper" class="modal-input-group" style="display: none;">
-                <label for="modalInputSenha">Senha</label>
-                <input type="password" id="modalInputSenha" class="modal-input" placeholder="********">
-            </div>
-
-            <div class="modal-footer">
-                <button id="modalCancelBtn" class="modal-button button-secondary">Cancelar</button>
-                <button id="modalConfirmBtn" class="modal-button button-destructive">Confirmar</button>
-            </div>
-        </div>
-    </div>
-
-    
     <script src="/src/scripts/core/settings-manager.js"></script>
-    <script type="module" src="/src/scripts/global.js"></script>    
-    <script type="module" src="/src/scripts/pages/settings.js"></script>
+    <script type="module" src="/src/scripts/global.js"></script>
+    <script type="module" src="/src/scripts/pages/amigos.js"></script> 
+
 </body>
 </html>

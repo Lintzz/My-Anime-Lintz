@@ -51,12 +51,12 @@
     border: 4px solid var(--cor-superficie);
 }
 
-.profile-container .follow-btn {
-    background-color: var(--cor-principal); color: white; border: none; padding: 8px 16px;
+.profile-container .amigo-btn {
+    background-color: var(--cor-principal); color: var(--cor-texto); border: none; padding: 8px 16px;
     border-radius: 20px; font-size: 0.9rem; font-weight: 700; cursor: pointer;
     transition: background-color 0.2s; display: inline-flex; align-items: center; gap: 8px;
 }
-.profile-container .follow-btn:hover { background-color: var(--cor-principal-hover); }
+.profile-container .amigo-btn:hover { background-color: var(--cor-principal-hover); }
 
 #edit-profile-btn{
     background-color: var(--cor-principal);
@@ -87,7 +87,7 @@
 .profile-container .profile-info-x .bio { font-size: 0.95rem; margin-top: 12px; line-height: 1.5; }
 .profile-container .followers-stats-x { display: flex; gap: 20px; margin-top: 12px; }
 .profile-container .followers-stats-x .stat strong { font-weight: 700; color: var(--cor-texto); }
-.profile-container .followers-stats-x .stat span { color: var(--cor-texto-secundario); }
+.profile-container .followers-stats-x .amigos span { color: var(--cor-texto-secundario); }
 
 .profile-container .profile-content {
     padding: 20px 25px;
@@ -105,6 +105,28 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 15px; 
 }
+
+.profile-container .stats-container .amigos-link{
+    text-decoration: none;
+    color: var(--cor-texto);
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+
+.profile-container .stats-container .amigos-link p{
+    color: var(--cor-texto-secundario);
+}
+
+.profile-container .stats-container .amigos{
+    display: flex;
+    gap:5px;
+}
+
 .profile-container .stat-item {
     background-color: var(--cor-fundo); border: 1px solid var(--cor-borda);
     border-radius: 12px; padding: 12px 15px; text-align: center;
@@ -163,7 +185,7 @@
 }
 .profile-container .social-links a:hover { color: var(--cor-principal); }
 
-.ConfigSeguir {
+.ConfigAmigo {
     display: flex;
     gap: 10px;
 }

@@ -1,5 +1,5 @@
-import { auth } from '/src/scripts/config/firebase-init.js';
-
+import { auth, db} from '/src/scripts/config/firebase-init.js';
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js";
 import {
     onAuthStateChanged,
     GoogleAuthProvider,
@@ -42,23 +42,46 @@ function clearError(element) {
 const provider = new GoogleAuthProvider();
 auth.languageCode = 'pt';
 
-function fazerLoginComGoogle(errorDisplayElement) { 
-    //console.log("Iniciando processo de login/registro com Google...");
+
+function fazerLoginComGoogle(errorDisplayElement) {
+    isRegistering = true;
+    
     clearError(errorDisplayElement); 
 
     signInWithPopup(auth, provider)
-        .then((result) => {
-            //console.log("Sucesso! Usuário:", result.user.displayName);
+        .then(async (result) => {
+            const user = result.user;
+            console.log("Login com Google bem-sucedido para:", user.displayName);
+
+            const profileRef = doc(db, "profiles", user.uid);
+            const docSnap = await getDoc(profileRef);
+
+            if (docSnap.exists()) {
+                console.log("Usuário recorrente encontrado. Redirecionando para o início.");
+                window.location.href = '/src/pages/inicio.html'; 
+            } else {
+                console.log("Novo usuário detectado. Redirecionando para completar o perfil.");
+            
+                prepararDadosParaCompletarPerfil(user);
+
+                window.location.href = '/src/pages/completar-registro.html';
+            }
         })
         .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error("Erro durante o login com Google:", errorCode, errorMessage);
-            displayError(errorDisplayElement, `Erro no login com Google: ${errorMessage}`);
+            console.error("Erro durante o login com Google:", error.code, error.message);
+            displayError(errorDisplayElement, `Erro no login com Google: ${error.message}`);
         });
 }
 
-// email/login
+function prepararDadosParaCompletarPerfil(user) {
+    const googleData = {
+        displayName: user.displayName,
+        photoURL: user.photoURL
+    };
+    sessionStorage.setItem('googleProfileData', JSON.stringify(googleData));
+}
+
+// registrar Com Email Senha
 async function registrarComEmailSenha(displayName, email, password, registerErrorMessage, confirmPassword) {
     const signupButton = document.getElementById('signupButton');
     
@@ -91,7 +114,7 @@ async function registrarComEmailSenha(displayName, email, password, registerErro
 
         await user.reload();
 
-        window.location.href = '/pages/index.html';
+        window.location.href = '/src/pages/completar-registro.html';
 
     } catch (error) {
         const errorCode = error.code;

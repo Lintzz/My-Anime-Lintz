@@ -319,7 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // BOTAO ADICIONAR 
   botaoAdicionar.addEventListener("click", () => {
     let imagemCapa = '';
-    listaAnimes.innerHTML = '';
+    // listaAnimes.innerHTML = ''; se quiser sumir com a lista quando adicionar 
     if (!nomesCarregados) {
       showAlert("Aguarde, carregando lista de animes...");
       return;
@@ -457,9 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     novoCard.querySelector(".cancelar-novo").addEventListener("click", () => {
-      novoCard.remove();
-      listaAnimes.innerHTML = '<p class="lista-vazia-msg">Nenhum anime encontrado.</p>';
-    
+      novoCard.remove();    
     });
 
     novoCard.querySelector(".salvar-novo").addEventListener("click", async () => {
